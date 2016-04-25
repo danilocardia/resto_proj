@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cardia.restaurante", "cardia.restaurante\cardia.restaurante.csproj", "{379E0B1C-984B-433F-ABA7-3E105493E92C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cardia.restaurante.RegraNegocio", "cardia.restaurante.RegraNegocio\cardia.restaurante.RegraNegocio.csproj", "{5B2A3D77-6D1C-4BD3-B805-63CA22CF43F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cardia.restaurante.DAO", "cardia.restaurante.DAO\cardia.restaurante.DAO.csproj", "{59D8D333-4B64-47DD-ABF6-F7273C3FA22E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{379E0B1C-984B-433F-ABA7-3E105493E92C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{379E0B1C-984B-433F-ABA7-3E105493E92C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{379E0B1C-984B-433F-ABA7-3E105493E92C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B2A3D77-6D1C-4BD3-B805-63CA22CF43F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2A3D77-6D1C-4BD3-B805-63CA22CF43F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2A3D77-6D1C-4BD3-B805-63CA22CF43F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2A3D77-6D1C-4BD3-B805-63CA22CF43F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59D8D333-4B64-47DD-ABF6-F7273C3FA22E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59D8D333-4B64-47DD-ABF6-F7273C3FA22E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59D8D333-4B64-47DD-ABF6-F7273C3FA22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59D8D333-4B64-47DD-ABF6-F7273C3FA22E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
