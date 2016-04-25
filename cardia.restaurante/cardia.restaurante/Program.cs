@@ -10,6 +10,8 @@ namespace cardia.restaurante
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Fabio Cardia Testando.");
+            Console.ReadKey();
         }
     }
 }
