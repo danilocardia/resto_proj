@@ -61,10 +61,11 @@ namespace cardia.restaurante.RegraNegocio
             return IdPedido;
         }
 
-        public virtual void AdicionarItens(int ID_Cat, int ID_Prod, int QTD, int ID_IA, int QTD_IA, string OBS, decimal Preco, int Id_Pedido)
+        public virtual void AdicionarItens(int ID_Cat, int ID_Prod, int QTD, int ID_IA, int QTD_IA, string OBS, decimal Preco)
         {
             DAO_Itens adItens = new DAO_Itens();
-            int IdPedido = PegarUltimoPedido();
+
+            int Id_Pedido = PegarUltimoPedido();
 
             if (ID_IA == 0 && QTD_IA == 0 && OBS == string.Empty)
                 adItens.NovoItens(ID_Cat, ID_Prod, QTD, Preco, Id_Pedido); //Não deseja Item adicional e não tem observação

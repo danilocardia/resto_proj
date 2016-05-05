@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AberturaCaixa.cs" />
     <Compile Include="Pedido.cs" />
+    <Compile Include="Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
