@@ -39,11 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AberturaCaixa.cs" />
     <Compile Include="Pedido.cs" />
-    <Compile Include="PedidoClienteBusca.cs" />
-    <Compile Include="PedidoMesa.cs" />
-    <Compile Include="PedidoMotoboyEntrega.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cardia.restaurante.DAO\cardia.restaurante.DAO.csproj">
+      <Project>{59d8d333-4b64-47dd-abf6-f7273c3fa22e}</Project>
+      <Name>cardia.restaurante.DAO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
