@@ -9,6 +9,7 @@ namespace cardia.restaurante.RegraNegocio
 {
     public class Pedido
     {
+        public int IdPedido { get; set; }
         public List<string> ListarCategoriaPorProd(int cod)
         {
             DAO_Produto prod = new DAO_Produto();
@@ -19,7 +20,7 @@ namespace cardia.restaurante.RegraNegocio
 
             for (int i = 0; i < listarPorCat.Rows.Count; i++)
             {
-                exibir.Add(listarPorCat.Rows[i][0]+" "+listarPorCat.Rows[i][1]+" "+listarPorCat.Rows[i][2]);
+                exibir.Add(listarPorCat.Rows[i][0] + " " + listarPorCat.Rows[i][1] + " " + listarPorCat.Rows[i][2]);
             }
 
             return exibir;
@@ -61,7 +62,7 @@ namespace cardia.restaurante.RegraNegocio
             return IdPedido;
         }
 
-        public virtual void AdicionarItens(int ID_Cat, int ID_Prod, int QTD, int ID_IA, int QTD_IA, string OBS, decimal Preco)
+        public void AdicionarItens(int ID_Cat, int ID_Prod, int QTD, int ID_IA, int QTD_IA, string OBS, decimal Preco)
         {
             DAO_Itens adItens = new DAO_Itens();
 
@@ -80,5 +81,60 @@ namespace cardia.restaurante.RegraNegocio
                 adItens.NovoItens(ID_Cat, ID_Prod, QTD, ID_IA, QTD_IA, OBS, Preco, Id_Pedido);//deseja Item adicional e tem observação
         }
 
+        public DataTable listarItensDeUmPedido()
+        {
+            //DAO_Pedidos pegarPedido = new DAO_Pedidos();
+            DAO_Itens pegarPedido = new DAO_Itens();
+            DataTable DT = new DataTable();
+            int ID_IA = 0, QTD_IA = 0;
+            string OBS = "";
+
+            //int IdPedido = 4;
+            DT.Columns.Add("ID_Cat", typeof(int));
+            DT.Columns.Add("ID_Prod", typeof(int));
+            DT.Columns.Add("QTD", typeof(int));
+            DT.Columns.Add("ID_IA", typeof(int));
+            DT.Columns.Add("QTD_IA", typeof(int));
+            DT.Columns.Add("OBS", typeof(string));
+            DT.Columns.Add("Preco", typeof(decimal));
+            DT.Columns.Add("IdPedido", typeof(int));
+
+            for (int i = 0; i < pegarPedido.ListarItens().Rows.Count; i++)
+            {
+                if (IdPedido == Convert.ToInt32(pegarPedido.ListarItens().Rows[i][8]))
+                {
+                    try
+                    {
+                        ID_IA = Convert.ToInt32(pegarPedido.ListarItens().Rows[i][4]);
+                    }
+                    catch (Exception)
+                    {
+                        ID_IA = 0;
+                    }
+
+                    try
+                    {
+                        QTD_IA = Convert.ToInt32(pegarPedido.ListarItens().Rows[i][5]);
+                    }
+                    catch (Exception)
+                    {
+                        QTD_IA = 0;
+                    }
+
+                    try
+                    {
+                        OBS = pegarPedido.ListarItens().Rows[i][6].ToString();
+                    }
+                    catch (Exception)
+                    {
+                        OBS = string.Empty;
+                    }
+
+                    DT.Rows.Add(Convert.ToInt32(pegarPedido.ListarItens().Rows[i][1]), Convert.ToInt32(pegarPedido.ListarItens().Rows[i][2]), Convert.ToInt32(pegarPedido.ListarItens().Rows[i][3]), ID_IA, QTD_IA, OBS, Convert.ToDecimal(pegarPedido.ListarItens().Rows[i][7]), Convert.ToInt32(pegarPedido.ListarItens().Rows[i][8]));
+                }//Convert.ToInt32(pegarPedido.ListarItens().Rows[i][0]), 
+            }
+
+            return DT;
+        }
     }
 }

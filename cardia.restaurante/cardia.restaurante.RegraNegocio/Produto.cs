@@ -14,8 +14,6 @@ namespace cardia.restaurante.RegraNegocio
             DAO_Produto calcProduto = new DAO_Produto();
             DAO_ItensAdicionais calcItensAdicionais = new DAO_ItensAdicionais();
             decimal preco = 0;
-            //DataRow dRowID, dRowPreco;
-            //DataTable DT_Produto = new DataTable();
 
             for (int i = 0; i < calcProduto.ListarProduto().Rows.Count; i++)
             {

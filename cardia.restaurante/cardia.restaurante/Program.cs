@@ -129,7 +129,7 @@ namespace cardia.restaurante
             DataTable DtNovoPedido = new DataTable();
             int ID_Cat = 0, ID_Prod = 0, QTD = 0, ID_IA = 0, QTD_IA = 0, val = 0;
             string OBS = string.Empty;
-            decimal Preco = 0;
+            decimal Preco = 0, valorTotal = 0;
 
             #region Colunas do DataTable DtNovoPedido
             DtNovoPedido.Columns.Add("ID_Cat", typeof(int));
@@ -141,6 +141,7 @@ namespace cardia.restaurante
             DtNovoPedido.Columns.Add("Preco", typeof(decimal));
             #endregion
 
+            #region laço do while
             do
             {   
                 Console.Write("Digite o codigo para categoria: ");
@@ -173,12 +174,12 @@ namespace cardia.restaurante
 
                 DtNovoPedido.Rows.Add(ID_Cat, ID_Prod, QTD, ID_IA, QTD_IA, OBS, Preco);
 
-                Console.Write("Deseja continuar a adicionar pedido? digitar qualquer valor para sim e (zero) 0 para não");
+                Console.Write("Deseja continuar a adicionar pedido? digitar qualquer valor para sim e (zero) 0 para não: ");
                 val = Convert.ToInt32(Console.ReadLine());
 
             } while (val != 0);
+            #endregion
 
-            decimal valorTotal = 0;
 
             for (int i = 0; i < DtNovoPedido.Rows.Count; i++)
             {
@@ -188,6 +189,88 @@ namespace cardia.restaurante
             }
 
             Console.WriteLine("\nValor total do pedido é: " + valorTotal);
+
+            novoPedido.NovoPedido();
+
+            for (int i = 0; i < DtNovoPedido.Rows.Count; i++)
+            {
+                novoPedido.AdicionarItens(Convert.ToInt32(DtNovoPedido.Rows[i][0]), Convert.ToInt32(DtNovoPedido.Rows[i][1]), Convert.ToInt32(DtNovoPedido.Rows[i][2]), Convert.ToInt32(DtNovoPedido.Rows[i][3]), Convert.ToInt32(DtNovoPedido.Rows[i][4]), DtNovoPedido.Rows[i][5].ToString(), Convert.ToDecimal(DtNovoPedido.Rows[i][6]));
+            }
+        }
+                
+        static void AcrecentarItemEmUmPedido()
+        {
+            Pedido acrecentar = new Pedido();
+            Produto recaucular = new Produto();
+            DataTable acrecentarItem = new DataTable();
+            int ID_Cat = 0, ID_Prod = 0, QTD = 0, ID_IA = 0, QTD_IA = 0, val = 0, IdPedido = 0;
+            string OBS = string.Empty;
+            decimal Preco = 0, valorTotal = 0;
+
+            Console.Write("Digite o numero do pedido que deseja acrecentar: ");
+            acrecentar.IdPedido = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine();
+
+            acrecentarItem = acrecentar.listarItensDeUmPedido();
+
+            do
+            {
+                Console.Write("Digite o codigo para categoria: ");
+                ID_Cat = Convert.ToInt32(Console.ReadLine());
+                Console.Write("\n");
+
+                Console.Write("Digite o codigo do produto: ");
+                ID_Prod = Convert.ToInt32(Console.ReadLine());
+                Console.Write("\n");
+
+                Console.Write("Digite a quantidade do produto: ");
+                QTD = Convert.ToInt32(Console.ReadLine());
+                Console.Write("\n");
+
+                Console.Write("Digite o codigo para item adicional: ");
+                ID_IA = Convert.ToInt32(Console.ReadLine());
+                Console.Write("\n");
+
+                Console.Write("Digite a quantidade do item adicional: ");
+                QTD_IA = Convert.ToInt32(Console.ReadLine());
+                Console.Write("\n");
+
+                Console.Write("Digite uma observação se houver: ");
+                OBS = Console.ReadLine();
+                Console.Write("\n");
+
+                Preco = recaucular.calcularPrecoDoProduto(ID_Prod, QTD, ID_IA, QTD_IA);
+
+                acrecentarItem.Rows.Add(ID_Cat, ID_Prod, QTD, ID_IA, QTD_IA, OBS, Preco, IdPedido);
+
+                Console.Write("Deseja continuar a adicionar pedido? digitar qualquer valor para sim e (zero) 0 para não: ");
+                val = Convert.ToInt32(Console.ReadLine());
+
+            } while (val != 0);
+
+            int qtdacrecentarItem = 0;
+            DataRow drow;
+
+            //qtdacrecentarItem = acrecentar.listarItensDeUmPedido().Rows.Count - acrecentarItem.Rows.Count;
+            qtdacrecentarItem = acrecentarItem.Rows.Count - acrecentar.listarItensDeUmPedido().Rows.Count;
+
+
+            for (int i = 0; i <= qtdacrecentarItem; i++)
+            {
+                if (i != 0)
+                {
+                    drow = acrecentarItem.Rows[acrecentarItem.Rows.Count - i];
+                    //acrecentar.AdicionarItens();
+                    acrecentar.AdicionarItens(drow.ItemArray[0],drow.ItemArray[1],drow.ItemArray[2],drow.ItemArray[3],drow.ItemArray[4],drow.ItemArray[5],drow.ItemArray[6],drow.ItemArray[7],);
+                }
+            }
+
+            for (int i = 0; i < Convert.ToInt32(acrecentarItem.Rows.Count); i++)
+            {
+                valorTotal += recaucular.calcularPrecoDoProduto(Convert.ToInt32(acrecentarItem.Rows[i][1]), Convert.ToInt32(acrecentarItem.Rows[i][2]), Convert.ToInt32(acrecentarItem.Rows[i][3]), Convert.ToInt32(acrecentarItem.Rows[i][4]));
+            }
+            Console.WriteLine(valorTotal);
         }
 
         static void MENU(int num)
@@ -211,7 +294,7 @@ namespace cardia.restaurante
                 case 5: NovoPedido();
                     break;
 
-                case 6:
+                case 6: AcrecentarItemEmUmPedido();
                     break;
 
                 case 7:
@@ -220,16 +303,14 @@ namespace cardia.restaurante
                 case 8:
                     break;
 
-                case 9: 
+                case 9: Console.Clear();
                     break;
 
                 default:
                     break;
             }
 
-            //Console.WriteLine("\nPressione qualquer tecla para continuar.");
-            //Console.ReadKey();
-            Console.Clear();
+            Console.WriteLine();
         }
 
     }//classe program
