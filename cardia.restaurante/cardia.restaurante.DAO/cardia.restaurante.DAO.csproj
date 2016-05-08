@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5B2A3D77-6D1C-4BD3-B805-63CA22CF43F6}</ProjectGuid>
+    <ProjectGuid>{59D8D333-4B64-47DD-ABF6-F7273C3FA22E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>cardia.restaurante.RegraNegocio</RootNamespace>
-    <AssemblyName>cardia.restaurante.RegraNegocio</AssemblyName>
+    <AssemblyName>cardia.restaurante.DAO</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,18 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AberturaCaixa.cs" />
-    <Compile Include="Pedido.cs" />
-    <Compile Include="Produto.cs" />
+    <Compile Include="DAO_Cliente.cs" />
+    <Compile Include="DAO_AberturaCaixa.cs" />
+    <Compile Include="DAO_Categoria.cs" />
+    <Compile Include="DAO_ItensAdicionais.cs" />
+    <Compile Include="DAO_Produto.cs" />
+    <Compile Include="DAO_Reposicao.cs" />
+    <Compile Include="DAO_Sangria.cs" />
+    <Compile Include="DAO_Departamento.cs" />
+    <Compile Include="DAO_Endereco.cs" />
+    <Compile Include="DAO_Itens.cs" />
+    <Compile Include="DAO_Mesa.cs" />
+    <Compile Include="DAO_Motoboy.cs" />
+    <Compile Include="DAO_Pedidos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reposicao.cs" />
-    <Compile Include="Sangria.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\cardia.restaurante.DAO\cardia.restaurante.DAO.csproj">
-      <Project>{59d8d333-4b64-47dd-abf6-f7273c3fa22e}</Project>
-      <Name>cardia.restaurante.DAO</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

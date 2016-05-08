@@ -15,6 +15,8 @@ namespace cardia.restaurante
         {
             int val = 0;
 
+            AbrirCaixa();
+
             do
             {
                 Console.WriteLine("Codigos:\n 1 - para Abrir Caixa, 2 - Ver data de ultimo de ultima abertura caixa,\n 3 - Listar categoria por Produto, 4 - Exibir categoria por Produto,\n 9 - Limpa a tela");
@@ -108,7 +110,7 @@ namespace cardia.restaurante
 
             for (int i = 0; i < pedido.ListarCategoriaPorProd(CodCat).Count; i++)
             {
-                Console.WriteLine(pedido.ListarCategoriaPorProd(CodCat)[i]);
+                Console.WriteLine("\n"+pedido.ListarCategoriaPorProd(CodCat)[i]);
             }
         }
 
@@ -203,7 +205,7 @@ namespace cardia.restaurante
             Pedido acrecentar = new Pedido();
             Produto recaucular = new Produto();
             DataTable acrecentarItem = new DataTable();
-            int ID_Cat = 0, ID_Prod = 0, QTD = 0, ID_IA = 0, QTD_IA = 0, val = 0, IdPedido = 0;
+            int ID_Cat = 0, ID_Prod = 0, QTD = 0, ID_IA = 0, QTD_IA = 0, val = 0;
             string OBS = string.Empty;
             decimal Preco = 0, valorTotal = 0;
 
@@ -242,7 +244,7 @@ namespace cardia.restaurante
 
                 Preco = recaucular.calcularPrecoDoProduto(ID_Prod, QTD, ID_IA, QTD_IA);
 
-                acrecentarItem.Rows.Add(ID_Cat, ID_Prod, QTD, ID_IA, QTD_IA, OBS, Preco, IdPedido);
+                acrecentarItem.Rows.Add(ID_Cat, ID_Prod, QTD, ID_IA, QTD_IA, OBS, Preco, acrecentar.IdPedido);
 
                 Console.Write("Deseja continuar a adicionar pedido? digitar qualquer valor para sim e (zero) 0 para não: ");
                 val = Convert.ToInt32(Console.ReadLine());
@@ -252,7 +254,6 @@ namespace cardia.restaurante
             int qtdacrecentarItem = 0;
             DataRow drow;
 
-            //qtdacrecentarItem = acrecentar.listarItensDeUmPedido().Rows.Count - acrecentarItem.Rows.Count;
             qtdacrecentarItem = acrecentarItem.Rows.Count - acrecentar.listarItensDeUmPedido().Rows.Count;
 
 
@@ -261,8 +262,7 @@ namespace cardia.restaurante
                 if (i != 0)
                 {
                     drow = acrecentarItem.Rows[acrecentarItem.Rows.Count - i];
-                    //acrecentar.AdicionarItens();
-                    acrecentar.AdicionarItens(drow.ItemArray[0],drow.ItemArray[1],drow.ItemArray[2],drow.ItemArray[3],drow.ItemArray[4],drow.ItemArray[5],drow.ItemArray[6],drow.ItemArray[7],);
+                    acrecentar.AdicionarItens(Convert.ToInt32(drow.ItemArray[0]), Convert.ToInt32(drow.ItemArray[1]), Convert.ToInt32(drow.ItemArray[2]), Convert.ToInt32(drow.ItemArray[3]), Convert.ToInt32(drow.ItemArray[4]), drow.ItemArray[5].ToString(), Convert.ToDecimal(drow.ItemArray[6]));
                 }
             }
 
@@ -271,6 +271,32 @@ namespace cardia.restaurante
                 valorTotal += recaucular.calcularPrecoDoProduto(Convert.ToInt32(acrecentarItem.Rows[i][1]), Convert.ToInt32(acrecentarItem.Rows[i][2]), Convert.ToInt32(acrecentarItem.Rows[i][3]), Convert.ToInt32(acrecentarItem.Rows[i][4]));
             }
             Console.WriteLine(valorTotal);
+        }
+
+        static void reporDinheiro()
+        {
+            var reporDinehiro = new Reposicao();
+
+            Console.Write("Digite o motivo para repor o dinheiro: ");
+            reporDinehiro.Descricao = Console.ReadLine();
+
+            Console.Write("Digite o valor para repor o dinheiro: ");
+            reporDinehiro.valor = Convert.ToDecimal(Console.ReadLine());
+
+            reporDinehiro.ReporDinheiro();
+        }
+
+        static void retirarDinheiro()
+        {
+            var retirar = new Sangria();
+
+            Console.Write("Digite o motivo para retirar dinheiro: ");
+            retirar.descricao = Console.ReadLine();
+
+            Console.Write("Digite o valor a ser retirado: ");
+            retirar.valor = Convert.ToDecimal(Console.ReadLine());
+            
+            retirar.RetirarDinehiro();
         }
 
         static void MENU(int num)
@@ -285,7 +311,7 @@ namespace cardia.restaurante
 
                 case 3:
                     Console.Write("Digite o codigo da categoria: ");
-                    ListarCategoriaPorProd(Convert.ToInt32(Console.ReadLine()));
+                    ListarCategoriaPorProd(Convert.ToInt32(Console.ReadLine()));                    
                     break;
 
                 case 4: ExibirCategoriaPorProd();
@@ -297,13 +323,46 @@ namespace cardia.restaurante
                 case 6: AcrecentarItemEmUmPedido();
                     break;
 
-                case 7:
+                case 7: reporDinheiro();
                     break;
 
-                case 8:
+                case 8: retirarDinheiro();
                     break;
 
-                case 9: Console.Clear();
+                case 9: 
+                    break;
+
+                case 10: 
+                    break;
+
+                case 11: 
+                    break;
+
+                case 12: 
+                    break;
+
+                case 13: 
+                    break;
+
+                case 14: 
+                    break;
+
+                case 15: 
+                    break;
+
+                case 16: 
+                    break;
+
+                case 17: 
+                    break;
+
+                case 18: 
+                    break;
+
+                case 19: 
+                    break;
+
+                case 20: Console.Clear();
                     break;
 
                 default:
